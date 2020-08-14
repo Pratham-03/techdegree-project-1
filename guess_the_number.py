@@ -25,15 +25,24 @@ def start_game():
     ( You can add more features/enhancements if you'd like to. )
     """
     # write your code inside this function.
+    high_score = 0
 
-    print('--------------------------------')
-    print('Welcome to number guessing game!')
-    print('--------------------------------')
+    name = str(input('Please enter to your name to begin:  '))
+
+    print('_______________________________________________________________________________________________________')
+    print("""
+ _____ _        _  _            _              ___                _            ___                
+|_   _| |_  ___| \| |_  _ _ __ | |__  ___ _ _ / __|_  _ ___ _____(_)_ _  __ _ / __|__ _ _ __  ___ 
+  | | | ' \/ -_) .` | || | '  \| '_ \/ -_) '_| (_ | || / -_|_-<_-< | ' \/ _` | (_ / _` | '  \/ -_)
+  |_| |_||_\___|_|\_|\_,_|_|_|_|_.__/\___|_|  \___|\_,_\___/__/__/_|_||_\__, |\___\__,_|_|_|_\___|•••
+                                                                        |___/  
+    """)
+    print(f'Hi there {name}, welcome to the number guessing game!')
+    print('_______________________________________________________________________________________________________\n')
 
     while True:
         random_number = random.randint(1, 10)
         tries = 0
-        high_score = 0
 
         while True:
             num = input('Pick a number between 1 to 10:  ')
@@ -45,35 +54,42 @@ def start_game():
                 continue
 
             if num not in range(1, 11):
-                print("The number is outside the range")
+                print("\nThe number is outside the range")
 
             elif num == random_number:
-                print(f'\nYou got it! It took you {tries+1} tries')
+                print(f'\nCongrats {name} you got it! The number was {num}')
+                tries += 1
                 break
 
             elif num > random_number:
-                print('It is lower!')
+                print(f"It's higher! Guess a number lower than {num}\n")
                 tries += 1
 
             elif num < random_number:
-                print('It is higher!')
+                print(f"It's lower! Guess a number higher than {num}\n")
                 tries += 1
-
+        
+        if tries == 1:
+            print(f'Nice Work! It took you {tries} try.')
+        else:  
+            print(f'Nice Work! It took you {tries} tries.')
+        
         if high_score == 0:
             high_score = tries
-        elif high_score > tries:
+        elif tries < high_score:
             high_score = tries
 
-        print('\n-x-x-x-x-x-x-x-x-x-x-x-x\n')
-        print(f'Your current HIGH SCORE is {high_score+1}')
+        print('\n_______________________________________________________________________________________________________\n')
         print('\nexiting...')
-        another_game = input('Would you like to go again [y/n]:  ').lower()
+        another_game = input("Would you like to go again? Please enter 'y' to continue or any other key to quit:  ").lower()
         print()
+
+        print(f'\nYour HIGH SCORE is {high_score}!\n')
 
         if another_game == 'y':
             continue
         break
-    print("-----Thank You for playing this game! Hope you enjoyed-----")
+    print(f"-----Thank You {name} for playing this game! Hope you enjoyed-----")
 
 
 # Kick off the program by calling the start_game function.
